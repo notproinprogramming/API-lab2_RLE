@@ -1,4 +1,5 @@
 #include "Base64.hpp"
+#include "RLE.hpp"
 #include <iostream>
 #include <cstdlib>
 
@@ -8,10 +9,13 @@ int main() {
 
     while (true) {
         std::cout << "\n=== MENU ===\n";
+        std::cout << "0) Exit\n";
         std::cout << "1) Base64 encode file\n";
         std::cout << "2) Base64 decode file\n";
+        std::cout << "3) RLE encode file\n";
+        std::cout << "4) RLE decode file\n";
         std::cout << "9) Open .base64 file in nvim\n";
-        std::cout << "0) Exit\n";
+    
 
         int choose;
         std::cin >> choose;
@@ -38,6 +42,26 @@ int main() {
             std::getline(std::cin, out);
 
             Base64DecodeFile(in, out);
+        }
+        else if (choose == 3) {
+            std::string in, out;
+            std::cout << "Input file: ";
+            std::cin >> in;
+            std::cin.ignore();
+            std::cout << "Output file (empty = default): ";
+            std::getline(std::cin, out);
+
+            RLEEncodeFile(in, out);
+        }
+        else if (choose == 4) {
+            std::string in, out;
+            std::cout << "Encoded file: ";
+            std::cin >> in;
+            std::cin.ignore();
+            std::cout << "Output file (empty = default): ";
+            std::getline(std::cin, out);
+
+            RLEDecodeFile(in, out);
         }
         else if (choose == 9) {
             std::string file;
